@@ -2,8 +2,10 @@ const express=require('express');
 const cors = require('cors');
 const helmet = require("helmet");
 const app=express();
+
 app.use(cors());
 app.use(helmet());
+
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
@@ -51,12 +53,12 @@ app.use('/',(req,res,next)=>{
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
     cookies_enabled:navigator.cookieEnabled,
-    device_connection_type:{...process},
+    // device_connection_type:{...process},
 })
 });
      
    
-    
+    console.log("process",{...process})
     console.log({...req.headers,...res.getHeaders()})
     console.log("ip",req.connection.remoteAddress);
     console.log(req.headers['x-forwarded-for']);
