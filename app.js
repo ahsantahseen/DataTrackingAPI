@@ -38,10 +38,11 @@ app.use('/products',productsRoutes);
 
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
-    res.status(200).json("ok");
+    res.status(200).json({headers:{...req.headers,...res.getHeaders(),...req.connection.remoteAddress,...req.cookies,...req.hostname}})
     console.log({...req.headers,...res.getHeaders()})
     console.log("ip",req.connection.remoteAddress);
     console.log(req.headers['x-forwarded-for']);
+
    
 })
 //Error Handler
