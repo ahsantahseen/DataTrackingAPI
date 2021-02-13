@@ -50,6 +50,7 @@ app.use('/',(req,res,next)=>{
     Device_OS:r.os.family,
     Device_OS_Version:r.os.major,
     Device_connectionType:req.query.ct,
+    Device_Language:req.headers['accept-language'],
     IPAdress:req.headers['x-forwarded-for'],
     Country:body['country'],
     City:body['city'],
