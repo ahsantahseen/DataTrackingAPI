@@ -51,12 +51,12 @@ app.use('/',(req,res,next)=>{
     State:body['regionName'],
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    connectionType:req.query.q.connection.effectiveType,
-    cookiesEnabled:req.query.q.cookiesEnabled,
+    connectionType:req.query.ct,
+    cookiesEnabled:req.query.ck,
     
 })
 });
-    console.log("windowobject",req.query.q);
+    console.log("windowobject",req.query);
     // console.log({...req.headers,...res.getHeaders()})
     // console.log("ip",req.connection.remoteAddress);
     // console.log(req.headers['x-forwarded-for']);
