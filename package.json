@@ -22,7 +22,6 @@
     "ipfy": "^2.4.0",
     "morgan": "^1.10.0",
     "navigator": "^1.0.1",
-    "network-type": "^1.0.0",
     "request": "^2.88.2",
     "ua-parser": "^0.3.5"
   },

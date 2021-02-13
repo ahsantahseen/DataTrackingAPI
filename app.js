@@ -9,8 +9,8 @@ app.use(helmet());
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
-const navigator=require('navigator')
-const networkType = require('network-type');
+const navigator=require('navigator');
+
 
 //Logger
 app.use(morgan('dev'))
@@ -53,12 +53,13 @@ app.use('/',(req,res,next)=>{
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
     cookies_enabled:navigator.cookieEnabled,
+    networkType:window.navigator.language
     
 })
 });
      
    
-    console.log(networkType());
+    
     console.log({...req.headers,...res.getHeaders()})
     console.log("ip",req.connection.remoteAddress);
     console.log(req.headers['x-forwarded-for']);
