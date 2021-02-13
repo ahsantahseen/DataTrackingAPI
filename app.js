@@ -36,7 +36,7 @@ next();
 app.use('/',(req,res,next)=>{
     var r = require('ua-parser').parse(req.headers['user-agent']);
     var timeStamp=new Date(Date.now())
-    var cookiesEnabled=navigator.cookieEnabled()
+    var cookiesEnabled=navigator.cookieEnabled;
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
