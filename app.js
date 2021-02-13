@@ -10,7 +10,7 @@ const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
 const navigator=require('navigator');
-
+require('browser-env')();
 
 //Logger
 app.use(morgan('dev'))
