@@ -34,24 +34,26 @@ next();
 })
 //Routes
 
-app.use('/products',productsRoutes);
-
-app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
     var r = require('ua-parser').parse(req.headers['user-agent']);
     var timeStamp=new Date(Date.now())
-
+    var cookiesEnabled=navigator.cookieEnabled;
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
-    responseHeaders:{...res.getHeaders()},
+    responseHeaders:{...res.getHeaders()},  
     requestHeaders:{...req.headers},
     remoteAddress:req.connection.remoteAddress,
     extraheaders:req.cookies,
     locationResponse:{...body},
     deviceParams:{...r},
-    timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds()
-
+    IPAdress:req.headers['x-forwarded-for'],
+    Country:body['country'],
+    City:body['city'],
+    State:body['regionName'],
+    TimeZone:body['timezone'],
+    timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
+    cookies_enabled:cookiesEnabled,
 })
 });
      
