@@ -38,31 +38,21 @@ app.use('/products',productsRoutes);
 
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
-    const locationParams = "";
-    request({
-        uri: 'http://www.giantbomb.com/api/search',
-        qs: {
-          api_key: '123456',
-          query: 'World of Warcraft: Legion'
-        },
-        function(error, response, body) {
-          if (!error && response.statusCode === 200) {
-            console.log(body);
-            locationParams = body;
-          } else {
-            res.json(error);
-          }
-        }
-      });
 
-    res.status(200).json({
-        responseHeaders:{...res.getHeaders()},
-        requestHeaders:{...req.headers},
-        remoteAddress:req.connection.remoteAddress,
-        cookies:req.cookies,
-        locationResponse:{...locationParams}
+    request('http://ip-api.com/json/24.48.0.1', { json: true }, (err, response, body) => {
+  if (err) { return console.log(err); }
+  res.status(200).json({
+    responseHeaders:{...res.getHeaders()},
+    requestHeaders:{...req.headers},
+    remoteAddress:req.connection.remoteAddress,
+    cookies:req.cookies,
+    locationResponse:{...body}
 
-    })
+})
+});
+     
+   
+    
     console.log({...req.headers,...res.getHeaders()})
     console.log("ip",req.connection.remoteAddress);
     console.log(req.headers['x-forwarded-for']);
