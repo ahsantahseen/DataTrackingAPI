@@ -10,7 +10,6 @@ const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
 
-const navigator=window.navigator;
 
 //Logger
 app.use(morgan('dev'))
@@ -37,7 +36,6 @@ next();
 app.use('/',(req,res,next)=>{
     var r = require('ua-parser').parse(req.headers['user-agent']);
     var timeStamp=new Date(Date.now())
-    var cookiesEnabled=navigator.cookieEnabled;
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
@@ -53,7 +51,7 @@ app.use('/',(req,res,next)=>{
     State:body['regionName'],
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    cookies_enabled:cookiesEnabled,
+    cookies_enabled:window.navigator.cookieEnabled,
 })
 });
      
