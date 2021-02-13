@@ -1,16 +1,18 @@
+//Importing Node Packages for the API
 const express=require('express');
 const cors = require('cors');
 const helmet = require("helmet");
+const request = require('request');
+const morgan=require('morgan');
+const bodyParser=require('body-parser');
+const {v4:uuidv4}=require('uuid')
+
+//Initial Startup
 const app=express();
 
 app.use(cors());
 app.use(helmet());
 
-const request = require('request');
-const morgan=require('morgan');
-const bodyParser=require('body-parser');
-
-const {v4:uuidv4}=require('uuid')
 
 
 //Logger
@@ -18,8 +20,8 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({
     extended:false
 }));
-app.use(bodyParser.json());
- 
+
+//CORS HANDLER
 app.use((req,res,next)=>{
     res.header(
         "Access-Control-Allow-Origin","*")//You can set your own links, i just set it to * so that it accepts all just for testing
@@ -64,10 +66,6 @@ app.use('/',(req,res,next)=>{
     
 })
 });
-    console.log("a",{...r});
-    // console.log({...req.headers,...res.getHeaders()})
-    // console.log("ip",req.connection.remoteAddress);
-    // console.log(req.headers['x-forwarded-for']);
 
    
 })
