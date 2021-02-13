@@ -6,8 +6,6 @@ const app=express();
 app.use(cors());
 app.use(helmet());
 app.use(log.logger);
-const productsRoutes=require('./apis/routes/product');
-const ordersRoutes=require('./apis/routes/orders');
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
