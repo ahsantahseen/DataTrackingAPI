@@ -10,6 +10,8 @@ const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
 
+const {v4:uuidv4}=require('uuid')
+
 
 //Logger
 app.use(morgan('dev'))
@@ -37,15 +39,11 @@ app.use('/',(req,res,next)=>{
     var r = require('ua-parser').parse(req.headers['user-agent']);
     
     var timeStamp=new Date(Date.now())
+    
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
-    responseHeaders:{...res.getHeaders()},  
-    requestHeaders:{...req.headers},
-    remoteAddress:req.connection.remoteAddress,
-    extraheaders:req.cookies,
-    locationResponse:{...body},
-    deviceParams:{...r},
+    Device_Id=uuidv4(),
     Device_Brand:r.family,
     Device_Name:r.device.family,
     Device_OS:r.os.family,
@@ -60,6 +58,7 @@ app.use('/',(req,res,next)=>{
     cookiesEnabled:req.query.ck,
     siteDomain:req.headers.origin,
     userAgent_Header:r.userAgent
+
     
 })
 });
