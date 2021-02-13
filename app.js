@@ -45,7 +45,7 @@ app.use('/',(req,res,next)=>{
     responseHeaders:{...res.getHeaders()},
     requestHeaders:{...req.headers},
     remoteAddress:req.connection.remoteAddress,
-    cookies:req.cookies,
+    extraheaders:req.cookies,
     locationResponse:{...body}
 
 })
