@@ -39,7 +39,7 @@ app.use('/products',productsRoutes);
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
     var r = require('ua-parser').parse(req.headers['user-agent']);
-    var timeStamp=Date.now()
+    var timeStamp=Date.getTime()
 
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
