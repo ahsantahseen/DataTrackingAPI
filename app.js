@@ -8,7 +8,7 @@ app.use(helmet());
 app.use(log.logger);
 const productsRoutes=require('./apis/routes/product');
 const ordersRoutes=require('./apis/routes/orders');
-
+const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
 
@@ -38,11 +38,29 @@ app.use('/products',productsRoutes);
 
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
+    const locationParams = "";
+    request({
+        uri: 'http://www.giantbomb.com/api/search',
+        qs: {
+          api_key: '123456',
+          query: 'World of Warcraft: Legion'
+        },
+        function(error, response, body) {
+          if (!error && response.statusCode === 200) {
+            console.log(body);
+            locationParams = body;
+          } else {
+            res.json(error);
+          }
+        }
+      });
+
     res.status(200).json({
         responseHeaders:{...res.getHeaders()},
         requestHeaders:{...req.headers},
         remoteAddress:req.connection.remoteAddress,
         cookies:req.cookies,
+        locationResponse:{...locationParams}
 
     })
     console.log({...req.headers,...res.getHeaders()})
