@@ -50,7 +50,7 @@ app.use('/',(req,res,next)=>{
     extraheaders:req.cookies,
     locationResponse:{...body},
     deviceParams:{...r},
-    timeStamp:"Date:"+timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+"Time:"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds()
+    timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds()
 
 })
 });
