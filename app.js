@@ -9,7 +9,7 @@ app.use(log.logger);
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
-global.navigator=require('web-midi-api')
+const navigator=require('web-midi-api')
 
 //Logger
 app.use(morgan('dev'))
