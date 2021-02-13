@@ -51,7 +51,7 @@ app.use('/',(req,res,next)=>{
     locationResponse:{...body},
     deviceParams:{...r},
     IPAdress:req.headers['x-forwarded-for'],
-    Country:{...body['country']},
+    Country:{...body.country},
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds()
 
 })
