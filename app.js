@@ -9,6 +9,7 @@ app.use(log.logger);
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
+const navigator=require('navigator')
 
 
 //Logger
@@ -51,7 +52,7 @@ app.use('/',(req,res,next)=>{
     State:body['regionName'],
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    cookies_enabled:window.navigator.cookieEnabled,
+    cookies_enabled:navigator.cookieEnabled
 })
 });
      
