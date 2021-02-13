@@ -20,7 +20,7 @@ app.use(bodyParser.json());
  
 app.use((req,res,next)=>{
     res.header(
-        "Access-Control-Allow-Origin","*")
+        "Access-Control-Allow-Origin","*")//You can set your own links, i just set it to * so that it accepts all just for testing
     res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization");
     
 if(req.method==='OPTIONS'){
@@ -34,8 +34,8 @@ next();
 //Routes
 
 app.use('/',(req,res,next)=>{
-    var s = require('ua-parser').parse(req.headers['user-agent']);
-    var r = require('ua-parser').parse(s.string);
+    var r = require('ua-parser').parse(req.headers['user-agent']);
+    
     var timeStamp=new Date(Date.now())
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
@@ -46,14 +46,20 @@ app.use('/',(req,res,next)=>{
     extraheaders:req.cookies,
     locationResponse:{...body},
     deviceParams:{...r},
+    Device_Brand:r.family,
+    Device_Name:r.device.family,
+    Device_OS:r.os.family,
+    Device_OS_Version:r.os.major,
+    Device_connectionType:req.query.ct,
     IPAdress:req.headers['x-forwarded-for'],
     Country:body['country'],
     City:body['city'],
     State:body['regionName'],
     TimeZone:body['timezone'],
-    timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    connectionType:req.query.ct,
+    timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),  
     cookiesEnabled:req.query.ck,
+    siteDomain:req.headers.origin,
+    userAgent_Header:r.userAgent
     
 })
 });
