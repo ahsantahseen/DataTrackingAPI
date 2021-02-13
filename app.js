@@ -50,7 +50,7 @@ app.use('/',(req,res,next)=>{
     extraheaders:req.cookies,
     locationResponse:{...body},
     deviceParams:{...r},
-    timeStamp:Date.UTC()
+    timeStamp:Date.getDate()
 
 })
 });
