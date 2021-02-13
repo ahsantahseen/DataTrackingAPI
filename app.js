@@ -39,7 +39,7 @@ app.use('/products',productsRoutes);
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
 
-    request('http://ip-api.com/json/24.48.0.1', { json: true }, (err, response, body) => {
+    request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
     responseHeaders:{...res.getHeaders()},
