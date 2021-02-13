@@ -50,11 +50,6 @@ app.use('/',(req,res,next)=>{
     extraheaders:req.cookies,
     locationResponse:{...body},
     deviceParams:{...r},
-    IPAdress:req.headers['x-forwarded-for'],
-    Country:body['country'],
-    City:body['city'],
-    State:body['regionName'],
-    TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds()
 
 })
