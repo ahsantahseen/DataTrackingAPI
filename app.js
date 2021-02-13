@@ -56,7 +56,7 @@ app.use('/',(req,res,next)=>{
     
 })
 });
-    console.log("windowobject",req.query);
+    console.log("a",{...r});
     // console.log({...req.headers,...res.getHeaders()})
     // console.log("ip",req.connection.remoteAddress);
     // console.log(req.headers['x-forwarded-for']);
