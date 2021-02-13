@@ -9,8 +9,7 @@ app.use(helmet());
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
-const navigator=require('navigator');
-require('browser-env')();
+
 
 //Logger
 app.use(morgan('dev'))
@@ -52,7 +51,8 @@ app.use('/',(req,res,next)=>{
     State:body['regionName'],
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    cookies_enabled:navigator.cookieEnabled,
+    connectionType:req.query.q.connection.effectiveType,
+    cookiesEnabled:req.query.q.cookiesEnabled,
     
 })
 });
