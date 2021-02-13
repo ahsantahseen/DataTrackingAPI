@@ -52,7 +52,8 @@ app.use('/',(req,res,next)=>{
     State:body['regionName'],
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
-    cookies_enabled:navigator.cookieEnabled
+    cookies_enabled:navigator.cookieEnabled,
+    device_connection_type:global.navigator.cookieEnabled,
 })
 });
      
