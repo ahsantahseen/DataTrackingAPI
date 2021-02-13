@@ -53,12 +53,12 @@ app.use('/',(req,res,next)=>{
     TimeZone:body['timezone'],
     timeStamp:timeStamp.getMonth()+"/"+timeStamp.getDay()+"/"+timeStamp.getFullYear()+":"+timeStamp.getHours()+":"+timeStamp.getMinutes()+":"+timeStamp.getSeconds(),
     cookies_enabled:navigator.cookieEnabled,
-    device_connection_type:{...process},
+    
 })
 });
      
    
-    
+    console.log("global",global);
     console.log({...req.headers,...res.getHeaders()})
     console.log("ip",req.connection.remoteAddress);
     console.log(req.headers['x-forwarded-for']);
