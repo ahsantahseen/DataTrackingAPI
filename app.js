@@ -3,6 +3,7 @@ const log = require('ipfy');
 const cors = require('cors');
 const helmet = require("helmet");
 const app=express();
+const Uaparser = require('ua-parser-js');
 app.use(cors());
 app.use(helmet());
 app.use(log.logger);
@@ -38,7 +39,8 @@ app.use('/products',productsRoutes);
 
 app.use('/orders',ordersRoutes);
 app.use('/',(req,res,next)=>{
-
+    const parser = new UAParser();
+    parser.setUA(req.headers['user-agent'].toString());
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
   res.status(200).json({
@@ -46,7 +48,8 @@ app.use('/',(req,res,next)=>{
     requestHeaders:{...req.headers},
     remoteAddress:req.connection.remoteAddress,
     extraheaders:req.cookies,
-    locationResponse:{...body}
+    locationResponse:{...body},
+    deviceParams:parser.getResult(),
 
 })
 });
