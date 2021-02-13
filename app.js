@@ -34,7 +34,8 @@ next();
 //Routes
 
 app.use('/',(req,res,next)=>{
-    var r = require('ua-parser').parse(req.headers['user-agent'].string);
+    var s = require('ua-parser').parse(req.headers['user-agent']);
+    var r = require('ua-parser').parse(s.string);
     var timeStamp=new Date(Date.now())
     request(`http://ip-api.com/json/${req.headers['x-forwarded-for']}`, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); }
