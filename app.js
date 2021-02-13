@@ -1,11 +1,9 @@
 const express=require('express');
-const log = require('ipfy');
 const cors = require('cors');
 const helmet = require("helmet");
 const app=express();
 app.use(cors());
 app.use(helmet());
-app.use(log.logger);
 const request = require('request');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
