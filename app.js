@@ -13,8 +13,6 @@ const app=express();
 app.use(cors());
 app.use(helmet());
 
-
-
 //Logger
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({
@@ -24,7 +22,8 @@ app.use(bodyParser.urlencoded({
 //CORS HANDLER
 app.use((req,res,next)=>{
     res.header(
-        "Access-Control-Allow-Origin","*")//You can set your own links, i just set it to * so that it accepts all just for testing
+        "Access-Control-Allow-Origin","*")//You can set your own links, 
+        //i just set it to * so that it accepts all just for testing
     res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization");
     
 if(req.method==='OPTIONS'){
@@ -73,7 +72,6 @@ app.use('/',(req,res,next)=>{
 
 app.use((req,res,next)=>{
     const error=new Error("Oops! Someting went wrong");
-    
     error.status=404
     next(error)
 })
